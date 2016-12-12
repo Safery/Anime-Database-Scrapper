@@ -1,15 +1,21 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+
+import org.json.simple.parser.ParseException;
 
 public class Scrapper {
 
 	public static void main(String[] args){
-		// Run to scrap all the anime database
-		//runScrapper();
+		// Get All Anime Data in Json format
+		runScrapper();
 		
-		// Create genre folder and set all anime by genre.
-		//getGenre();
+		// Sort all anime from database into sub genre folders.
+		getGenre();
+		
+		// Get all the images for the anime from database to local folder.
+		getImages();
 	}
 	
 	private static void runScrapper(){
@@ -46,6 +52,22 @@ public class Scrapper {
 			} catch (Exception e){
 				counter++;
 			}
+		}
+	}
+	
+	private static void getImages(){
+		ImageScrapper img = new ImageScrapper();
+		try {
+			img.getImage();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
